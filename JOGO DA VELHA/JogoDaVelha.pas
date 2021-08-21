@@ -119,14 +119,8 @@ begin
 
         end;
 
-    Writeln('Passou por aqui secundaria: ');
-    Writeln(cont1);
-    Writeln(cont2);
-
-    if (cont1 = 3) then
-        ganhouDiagonalSecundaria := true
-    else if (cont2 = 3) then
-        ganhouDiagonalSecundaria := true;
+    if (cont1 = 3) then ganhouDiagonalSecundaria := true
+    else if (cont2 = 3) then ganhouDiagonalSecundaria := true;
 
 end;
 
@@ -185,6 +179,30 @@ begin
     end;
 
     exibir(board);
-    writeln('PARABÉNS!! VOCE GANHOU: JOGADOR ', (jogador MOD 2) + 1, '!!!!!!');
+
+    if (ganhou = true) then
+    begin
+        Writeln('');
+        Writeln('');
+        Writeln('*  *   *   * *   * *   * *   * *   * *   * *   * *   * *   * * ');
+        Writeln('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+        writeln(' ** *** **** PARABENS!! VOCE GANHOU: JOGADOR ', (jogador MOD 2) + 1, '!!!!!! **** *** **');
+        Writeln('*  *   *   * *   * *   * *   * *   * *   * *   * *   * *   * * ');
+        Writeln('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+        Writeln('');
+    end
+       
+    else 
+        begin
+            Writeln('');
+            Writeln('');
+            Writeln('################################################################');
+            Writeln('________________________________________________________________');
+            writeln('                  ## NINGUEM GANHOU O JOGO! ##                  ');
+            Writeln('________________________________________________________________');
+            Writeln('################################################################');
+            Writeln('');
+        end;
+        
 
 end.
