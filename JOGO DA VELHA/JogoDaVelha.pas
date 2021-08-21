@@ -77,6 +77,46 @@ begin
 
 end;
 
+// verifica se ganhou pela diagonal principal
+
+procedure ganhouDiagonalPrincipal(linha : integer; coluna : integer; var board : matriz);
+
+var cont1 : integer = 0;
+var cont2 : integer = 0;
+
+begin
+    for linha := 1 to 3 do
+        begin
+        for coluna := 1 to 3 do
+            begin
+                if (linha = coluna) then
+                  begin
+                    if (board[linha][coluna] = 'X') then
+                      begin
+                        cont1+=1
+                      end
+                    else if (board[linha][coluna] = 'O') then
+                        begin
+                          cont2+=1;
+                        end;
+                  end;
+            end;
+        end;
+    Writeln('Passou por aqui: ');
+    Writeln(cont1);
+    Writeln(cont2);
+
+    if (cont1 = 3) then
+      begin
+        Writeln('O jogador X ganhou');
+      end
+    else if (cont2 = 3) then
+      begin
+        Writeln('O jogador O ganhou');
+      end;
+
+end;
+
 // programa principal (main)
 begin
   
@@ -93,6 +133,7 @@ begin
     begin
         exibir(board);
         writeln();
+        ganhouDiagonalPrincipal(linha, coluna, board);
         writeln('JOGADOR: ', jogador);
         writeln();
         validarEntrada('linha', linha);
