@@ -92,28 +92,36 @@ begin
                 if (i = j) then
                     begin
 
-                    if (board[i][j] = 'X') then cont1 += 1
-                    else if (board[i][j] = 'O') then cont2 += 2;
+                        if (board[i][j] = 'X') then cont1 += 1
+                        else if (board[i][j] = 'O') then cont2 += 2;
 
                     end;
             end;
         end;
 
-    Writeln('Passou por aqui: ');
-    Writeln(cont1);
-    Writeln(cont2);
-
-    if (cont1 = 3) then
-        ganhouDiagonalPrincipal := true
-    else if (cont2 = 3) then
-        ganhouDiagonalPrincipal := true;
+    if (cont1 = 3) then ganhouDiagonalPrincipal := true
+    else if (cont2 = 3) then ganhouDiagonalPrincipal := true;
 
 end;
 
 // chama as duas funções de verificação de vitória
 function ganhou() : boolean;
 begin
-    if(ganhouDiagonalPrincipal = true) then ganhou := true; 
+    ganhou := false;
+
+    for i := 1 to 3 do
+        begin
+
+            if(board[i][1] = board[i][2]) and (board[i][2] = board[i][3]) and (board[i][1] <> '-') then ganhou := true;
+            for j := 1 to 3 do
+                begin
+                    if(board[1][j] = board[2][j]) and (board[2][j] = board[3][j]) and (board[1][j] <> '-') then ganhou := true;
+                end;
+
+        end;
+
+    if (ganhouDiagonalPrincipal(board) = true) then ganhou := true;
+
 end;
 
 procedure ganhouDiagonalSecundaria(linha : integer; coluna : integer; var board : matriz);
@@ -130,7 +138,6 @@ begin
     writeln('-=-=-=-=-=-=- Jogo da Velha -=-=-=-=-=-');
     writeln();
 
-
     linha := 1;
     coluna := 1;
 
@@ -138,7 +145,6 @@ begin
     begin
         exibir(board);
         writeln();
-        ganhouDiagonalPrincipal(board);
         writeln('JOGADOR: ', jogador);
         writeln();
         validarEntrada('linha', linha);
