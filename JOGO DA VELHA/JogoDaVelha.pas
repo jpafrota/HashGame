@@ -10,7 +10,6 @@ var
     linha, coluna : integer;
     pieceCount : integer = 0;
     jogador : integer = 1;
-    piece : char;
 
 // preenche valores iniciais no tabuleiro
 procedure preencher(var board : matriz);
@@ -93,7 +92,7 @@ begin
                     begin
 
                         if (board[i][j] = 'X') then cont1 += 1
-                        else if (board[i][j] = 'O') then cont2 += 2;
+                        else if (board[i][j] = 'O') then cont2 += 1;
 
                     end;
             end;
@@ -122,12 +121,6 @@ begin
 
     if (ganhouDiagonalPrincipal(board) = true) then ganhou := true;
 
-end;
-
-procedure ganhouDiagonalSecundaria(linha : integer; coluna : integer; var board : matriz);
-
-begin
-  
 end;
 
 // programa principal (main)
@@ -164,6 +157,6 @@ begin
     end;
 
     exibir(board);
-    writeln();
+    writeln('PARABÉNS!! VOCE GANHOU: JOGADOR ', (jogador MOD 2) + 1, '!!!!!!');
 
 end.
