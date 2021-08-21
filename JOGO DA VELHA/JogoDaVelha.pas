@@ -103,6 +103,33 @@ begin
 
 end;
 
+// verifica se ganhou pela diagonal secundária
+function ganhouDiagonalSecundaria(var board : matriz) : boolean;
+
+var cont1 : integer = 0;
+var cont2 : integer = 0;
+
+begin
+    ganhouDiagonalSecundaria := false;
+    for i := 1 to 3 do
+        begin
+            if (board[i][3-i+1] = 'X') then cont1 += 1
+
+            else if (board[i][3-i+1] = 'O') then cont2 += 1;
+
+        end;
+
+    Writeln('Passou por aqui secundaria: ');
+    Writeln(cont1);
+    Writeln(cont2);
+
+    if (cont1 = 3) then
+        ganhouDiagonalSecundaria := true
+    else if (cont2 = 3) then
+        ganhouDiagonalSecundaria := true;
+
+end;
+
 // chama as duas funções de verificação de vitória
 function ganhou() : boolean;
 begin
@@ -120,6 +147,7 @@ begin
         end;
 
     if (ganhouDiagonalPrincipal(board) = true) then ganhou := true;
+    if (ganhouDiagonalSecundaria(board) = true) then ganhou := true;
 
 end;
 
