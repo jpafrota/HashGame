@@ -78,43 +78,42 @@ begin
 end;
 
 // verifica se ganhou pela diagonal principal
-
-procedure ganhouDiagonalPrincipal(linha : integer; coluna : integer; var board : matriz);
+function ganhouDiagonalPrincipal(var board : matriz) : boolean;
 
 var cont1 : integer = 0;
 var cont2 : integer = 0;
 
 begin
-    for linha := 1 to 3 do
+    ganhouDiagonalPrincipal := false;
+    for i := 1 to 3 do
         begin
-        for coluna := 1 to 3 do
+        for j := 1 to 3 do
             begin
-                if (linha = coluna) then
-                  begin
-                    if (board[linha][coluna] = 'X') then
-                      begin
-                        cont1+=1
-                      end
-                    else if (board[linha][coluna] = 'O') then
-                        begin
-                          cont2+=1;
-                        end;
-                  end;
+                if (i = j) then
+                    begin
+
+                    if (board[i][j] = 'X') then cont1 += 1
+                    else if (board[i][j] = 'O') then cont2 += 2;
+
+                    end;
             end;
         end;
+
     Writeln('Passou por aqui: ');
     Writeln(cont1);
     Writeln(cont2);
 
     if (cont1 = 3) then
-      begin
-        Writeln('O jogador X ganhou');
-      end
+        ganhouDiagonalPrincipal := true
     else if (cont2 = 3) then
-      begin
-        Writeln('O jogador O ganhou');
-      end;
+        ganhouDiagonalPrincipal := true;
 
+end;
+
+// chama as duas funções de verificação de vitória
+function ganhou() : boolean;
+begin
+    if(ganhouDiagonalPrincipal = true) then ganhou := true; 
 end;
 
 // programa principal (main)
@@ -129,11 +128,11 @@ begin
     linha := 1;
     coluna := 1;
 
-    while (pieceCount < 9) do
+    while (pieceCount < 9) and (ganhou = false) do
     begin
         exibir(board);
         writeln();
-        ganhouDiagonalPrincipal(linha, coluna, board);
+        ganhouDiagonalPrincipal(board);
         writeln('JOGADOR: ', jogador);
         writeln();
         validarEntrada('linha', linha);
