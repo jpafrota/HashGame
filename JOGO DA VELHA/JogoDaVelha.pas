@@ -116,6 +116,12 @@ begin
     if(ganhouDiagonalPrincipal = true) then ganhou := true; 
 end;
 
+procedure ganhouDiagonalSecundaria(linha : integer; coluna : integer; var board : matriz);
+
+begin
+  
+end;
+
 // programa principal (main)
 begin
   
