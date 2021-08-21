@@ -10,3 +10,22 @@ Diagonal Secundária
 
 [2,0] = 3-1-2 = 0
 
+
+# Comandos de git
+
+## Mostra quais mudanças pretendes subir (y) yes e (n) no
+
+> git add --patch
+
+## Guarda as mudanças sem ter que commitá-las
+> git stash
+
+## Mostra as tuas modificações guardadas no stash
+
+> git stash list 
+
+## caso tenha feito o git pull
+## O comando abaixo trás as mudanças do teu ambiente remoto
+
+> git stash pop
+
