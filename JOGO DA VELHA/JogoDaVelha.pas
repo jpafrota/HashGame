@@ -49,10 +49,12 @@ end;
 procedure validarEntrada(tipo : String; var entrada : integer);
 begin
     entrada := 0;
-    while(entrada < 1) or (entrada > 9) do
+    while(entrada < 1) or (entrada > 3) do
     begin
         write('Digite a ', tipo, ': ');
         readln(entrada);
+        if (entrada < 1) or (entrada > 3) then
+            WriteLn('Entrada invalida. Tente Novamente.');
     end;
 end;
 
@@ -85,18 +87,18 @@ var cont2 : integer = 0;
 begin
     ganhouDiagonalPrincipal := false;
     for i := 1 to 3 do
-        begin
+    begin
         for j := 1 to 3 do
+        begin
+            if (i = j) then
             begin
-                if (i = j) then
-                    begin
 
-                        if (board[i][j] = 'X') then cont1 += 1
-                        else if (board[i][j] = 'O') then cont2 += 1;
+                if (board[i][j] = 'X') then cont1 += 1
+                else if (board[i][j] = 'O') then cont2 += 1;
 
-                    end;
             end;
         end;
+    end;
 
     if (cont1 = 3) then ganhouDiagonalPrincipal := true
     else if (cont2 = 3) then ganhouDiagonalPrincipal := true;
@@ -112,33 +114,40 @@ var cont2 : integer = 0;
 begin
     ganhouDiagonalSecundaria := false;
     for i := 1 to 3 do
-        begin
-            if (board[i][3-i+1] = 'X') then cont1 += 1
+    begin
+        if (board[i][3-i+1] = 'X') then cont1 += 1
 
-            else if (board[i][3-i+1] = 'O') then cont2 += 1;
+        else if (board[i][3-i+1] = 'O') then cont2 += 1;
 
-        end;
+    end;
 
     if (cont1 = 3) then ganhouDiagonalSecundaria := true
     else if (cont2 = 3) then ganhouDiagonalSecundaria := true;
 
 end;
 
-// chama as duas funções de verificação de vitória
+// verifica vitória em cada linha, coluna e nas diagonais
 function ganhou() : boolean;
 begin
     ganhou := false;
 
     for i := 1 to 3 do
+    begin
+        
+        if(board[i][1] = board[i][2]) and
+        (board[i][2] = board[i][3]) and 
+        (board[i][1] <> '-') then
+            ganhou := true;
+
+        for j := 1 to 3 do
         begin
-
-            if(board[i][1] = board[i][2]) and (board[i][2] = board[i][3]) and (board[i][1] <> '-') then ganhou := true;
-            for j := 1 to 3 do
-                begin
-                    if(board[1][j] = board[2][j]) and (board[2][j] = board[3][j]) and (board[1][j] <> '-') then ganhou := true;
-                end;
-
+            if(board[1][j] = board[2][j]) and
+            (board[2][j] = board[3][j]) and
+            (board[1][j] <> '-') then
+                ganhou := true;
         end;
+
+    end;
 
     if (ganhouDiagonalPrincipal(board) = true) then ganhou := true;
     if (ganhouDiagonalSecundaria(board) = true) then ganhou := true;
@@ -193,16 +202,16 @@ begin
     end
        
     else 
-        begin
-            Writeln('');
-            Writeln('');
-            Writeln('################################################################');
-            Writeln('________________________________________________________________');
-            writeln('                  ## NINGUEM GANHOU O JOGO! ##                  ');
-            Writeln('________________________________________________________________');
-            Writeln('################################################################');
-            Writeln('');
-        end;
+    begin
+        Writeln('');
+        Writeln('');
+        Writeln('################################################################');
+        Writeln('________________________________________________________________');
+        writeln('                  ## NINGUEM GANHOU O JOGO! ##                  ');
+        Writeln('________________________________________________________________');
+        Writeln('################################################################');
+        Writeln('');
+    end;
         
 
 end.
